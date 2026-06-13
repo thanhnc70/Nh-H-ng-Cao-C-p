@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+
+    <script src="assets/js/auth.js"></script>
+
+<script>
+
+protectRoute();
+
+</script>
+
+<meta charset="UTF-8">
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>WS Restaurant Booking</title>
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<link rel="stylesheet"
+href="assets/css/style.css">
+
+<link rel="stylesheet"
+href="assets/css/responsive.css">
+
+</head>
+
+<body>
+
+<!-- HEADER -->
+
+<header class="header">
+
+<nav class="navbar">
+
+<div class="logo">
+
+<i class="fa-solid fa-utensils"></i>
+
+<span>WS RESTAURANT</span>
+
+</div>
+
+<ul class="nav-links">
+
+<li><a href="index.html">Trang Chủ</a></li>
+
+<li><a href="menu.html">Menu</a></li>
+
+<li><a href="booking.html">Đặt Bàn</a></li>
+
+<li><a href="cart.html">Giỏ Hàng</a></li>
+
+</ul>
+
+<div id="menu-btn">
+
+<i class="fa-solid fa-bars"></i>
+
+</div>
+
+</nav>
+
+</header>
+
+<!-- HERO -->
+
+<section class="menu-hero">
+
+<h1>ĐẶT BÀN NHÀ HÀNG</h1>
+
+<p>
+
+Luxury Reservation Experience
+
+</p>
+
+</section>
+
+<!-- BOOKING -->
+
+<section class="booking-section">
+
+<div class="booking-container">
+
+<!-- FORM -->
+
+<div class="booking-form">
+
+<h2>
+
+Reservation Form
+
+</h2>
+
+<input
+type="text"
+id="customerName"
+placeholder="Họ tên">
+
+<input
+type="tel"
+id="customerPhone"
+placeholder="Số điện thoại">
+
+<input
+type="email"
+id="customerEmail"
+placeholder="Email">
+
+<input
+type="date"
+id="bookingDate">
+
+<select id="bookingTime">
+
+<option value="">
+
+Chọn giờ đặt
+
+</option>
+
+<option>
+
+10:00
+
+</option>
+
+<option>
+
+12:00
+
+</option>
+
+<option>
+
+14:00
+
+</option>
+
+<option>
+
+18:00
+
+</option>
+
+<option>
+
+20:00
+
+</option>
+
+</select>
+
+<select id="guestCount">
+
+<option value="">
+
+Số lượng khách
+
+</option>
+
+<option>2 người</option>
+<option>4 người</option>
+<option>6 người</option>
+<option>8 người</option>
+<option>10 người</option>
+
+</select>
+
+<textarea
+id="bookingNote"
+
+rows="5"
+
+placeholder="Ghi chú">
+
+</textarea>
+
+</div>
+
+<!-- TABLE AREA -->
+
+<div class="table-layout">
+
+<h2>
+
+Chọn Khu Vực
+
+</h2>
+
+<div class="table-grid">
+
+<div class="table-card"
+
+onclick="selectTable('VIP')">
+
+VIP
+
+</div>
+
+<div class="table-card"
+
+onclick="selectTable('Family')">
+
+Family
+
+</div>
+
+<div class="table-card"
+
+onclick="selectTable('Window')">
+
+Window
+
+</div>
+
+<div class="table-card"
+
+onclick="selectTable('Outdoor')">
+
+Outdoor
+
+</div>
+
+</div>
+
+<div id="selected-table">
+
+No Table Selected
+
+</div>
+
+<button
+class="checkout-btn"
+
+onclick="saveBooking()">
+
+Confirm Reservation
+
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- HISTORY -->
+
+<section class="booking-history">
+
+<h2 class="section-title">
+
+Reservation History
+
+</h2>
+
+<div id="booking-list">
+
+<!-- JS RENDER -->
+
+</div>
+
+</section>
+
+<!-- SUCCESS MODAL -->
+
+<div id="booking-modal"
+
+class="checkout-modal">
+
+<div class="checkout-content">
+
+<h2>
+
+Booking Success
+
+</h2>
+
+<p>
+
+Your reservation has been saved.
+
+</p>
+
+<button
+class="checkout-btn"
+
+onclick="closeBookingModal()">
+
+Close
+
+</button>
+
+</div>
+
+</div>
+
+<!-- TOAST -->
+
+<div id="toast"></div>
+
+<!-- JS -->
+
+<script src="assets/js/booking.js"></script>
+
+</body>
+
+</html>

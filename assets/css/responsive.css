@@ -1,0 +1,356 @@
+/* ===================================
+LARGE SCREEN
+=================================== */
+
+@media(max-width:1400px){
+
+.hero h1{
+font-size:60px;
+}
+
+.section-title{
+font-size:38px;
+}
+
+}
+
+/* ===================================
+LAPTOP
+=================================== */
+
+@media(max-width:1200px){
+
+.navbar{
+padding:18px 5%;
+}
+
+.hero h1{
+font-size:55px;
+}
+
+.hero p{
+font-size:18px;
+}
+
+.promo-box h2{
+font-size:42px;
+}
+
+.newsletter-box input{
+width:420px;
+}
+
+}
+
+/* ===================================
+TABLET
+=================================== */
+
+@media(max-width:992px){
+
+/* NAV */
+
+.nav-links{
+
+position:absolute;
+
+top:100%;
+
+left:-100%;
+
+width:100%;
+
+background:#111;
+
+flex-direction:column;
+
+text-align:center;
+
+padding:30px 0;
+
+transition:.4s;
+
+border-top:1px solid #222;
+
+}
+
+.nav-links.active{
+left:0;
+}
+
+#menu-btn{
+display:block;
+color:#fff;
+}
+
+/* HERO */
+
+.hero{
+padding:100px 25px;
+}
+
+.hero h1{
+font-size:48px;
+}
+
+.hero p{
+font-size:17px;
+}
+
+/* BUTTON */
+
+.hero-buttons{
+flex-direction:column;
+align-items:center;
+}
+
+/* CATEGORY */
+
+.category-grid{
+grid-template-columns:repeat(2,1fr);
+}
+
+/* FOOD */
+
+.food-grid{
+grid-template-columns:1fr;
+}
+
+/* REVIEW */
+
+.review-grid{
+grid-template-columns:1fr;
+}
+
+/* FOOTER */
+
+.footer-grid{
+grid-template-columns:1fr;
+text-align:center;
+}
+
+.social{
+justify-content:center;
+}
+
+}
+
+/* ===================================
+MOBILE LARGE
+=================================== */
+
+@media(max-width:768px){
+
+.navbar{
+padding:15px 4%;
+}
+
+.logo{
+font-size:20px;
+}
+
+.nav-icons{
+gap:12px;
+}
+
+.login-btn{
+display:none;
+}
+
+.hero{
+min-height:85vh;
+}
+
+.hero h1{
+font-size:40px;
+line-height:1.3;
+}
+
+.hero p{
+font-size:16px;
+line-height:1.7;
+}
+
+.section-title{
+font-size:34px;
+}
+
+/* SEARCH */
+
+.search-container{
+flex-direction:column;
+gap:12px;
+}
+
+.search-container input{
+border-radius:12px;
+}
+
+.search-container button{
+border-radius:12px;
+}
+
+/* CATEGORY */
+
+.category-grid{
+grid-template-columns:1fr;
+}
+
+.category-card{
+padding:35px;
+}
+
+/* PROMO */
+
+.promo-box{
+padding:50px 25px;
+}
+
+.promo-box h2{
+font-size:36px;
+}
+
+/* NEWSLETTER */
+
+.newsletter h2{
+font-size:38px;
+}
+
+.newsletter-box{
+flex-direction:column;
+gap:15px;
+align-items:center;
+}
+
+.newsletter-box input{
+width:100%;
+border-radius:12px;
+}
+
+.newsletter-box button{
+width:100%;
+border-radius:12px;
+}
+
+/* FOOD IMAGE */
+
+.food-card img{
+height:220px;
+}
+
+}
+
+/* ===================================
+MOBILE SMALL
+=================================== */
+
+@media(max-width:576px){
+
+.hero{
+padding:80px 20px;
+}
+
+.hero h1{
+font-size:34px;
+}
+
+.hero p{
+font-size:15px;
+}
+
+.gold-btn,
+.outline-btn{
+
+width:100%;
+
+font-size:15px;
+
+}
+
+.section-title{
+font-size:30px;
+}
+
+.category,
+.featured,
+.review,
+.promo,
+.newsletter{
+
+padding:70px 5%;
+
+}
+
+.food-card h3{
+font-size:24px;
+}
+
+.price-row{
+flex-direction:column;
+gap:18px;
+align-items:flex-start;
+}
+
+.promo-box h2{
+font-size:30px;
+}
+
+.newsletter h2{
+font-size:32px;
+}
+
+.footer{
+padding:60px 5% 25px;
+}
+
+#topBtn{
+
+right:18px;
+
+bottom:18px;
+
+width:50px;
+
+height:50px;
+
+font-size:18px;
+
+}
+
+}
+
+/* ===================================
+EXTRA SMALL DEVICE
+=================================== */
+
+@media(max-width:400px){
+
+.logo span{
+display:none;
+}
+
+.hero h1{
+font-size:28px;
+}
+
+.hero p{
+font-size:14px;
+}
+
+.nav-icons i{
+font-size:18px;
+}
+
+.section-title{
+font-size:26px;
+}
+
+.promo-box h2{
+font-size:26px;
+}
+
+.newsletter h2{
+font-size:28px;
+}
+
+}

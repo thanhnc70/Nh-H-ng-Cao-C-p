@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WS Restaurant Login</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/responsive.css">
+</head>
+
+<body>
+
+    <section class="auth-page">
+        <div class="auth-container">
+            
+            <div class="auth-left">
+                <h1>WS RESTAURANT</h1>
+                <p>Enterprise Restaurant Management Platform</p>
+                <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4" alt="restaurant">
+            </div>
+
+            <div class="auth-right">
+                <h2>Đăng Nhập</h2>
+                <p class="auth-subtitle">Login Customer / Admin</p>
+                
+                <form class="auth-form" id="loginForm">
+                    <input type="email" id="loginEmail" placeholder="Email" required>
+                    <input type="password" id="loginPassword" placeholder="Password" required>
+                    
+                    <div class="remember-box">
+                        <label>
+                            <input type="checkbox" id="rememberMe"> Remember Login
+                        </label>
+                    </div>
+
+                    <button type="submit" class="auth-btn">LOGIN</button>
+                    
+                    <p class="switch-auth">
+                        Chưa có tài khoản? <a href="register.html">Đăng ký</a>
+                    </p>
+                </form>
+            </div>
+
+        </div>
+    </section>
+
+    <div id="toast"></div>
+
+    <br><br>
+    <div style="text-align: center;">
+        <a href="index.html">
+            <button class="back-home-btn">Quay Lại Trang Chủ</button>
+        </a>
+    </div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', async function(e) {
+            e.preventDefault(); // Ngăn chặn tải lại trang khi bấm nút
+
+            // Lấy chính xác dữ liệu từ hai ô input theo ID của bạn
+            const email = document.getElementById('loginEmail').value.trim();
+            const password = document.getElementById('loginPassword').value;
+
+            if (!email || !password) {
+                alert('Vui lòng điền đầy đủ thông tin đăng nhập!');
+                return;
+            }
+
+            try {
+                // Thực hiện gọi API đăng nhập tới Backend Node.js
+                const response = await fetch('http://localhost:5000/api/auth/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ email, password })
+                });
+
+                const data = await response.json();
+
+                if (response.ok && data.success) {
+                    alert('Đăng nhập thành công!');
+
+                    // Lưu trữ thông tin người dùng được phản hồi từ DB vào localStorage
+                    localStorage.setItem('currentUser', JSON.stringify(data.user));
+
+                    // Kiểm tra phân quyền để điều hướng trang chính xác (Không phân biệt hoa thường)
+                    if (data.user.role && data.user.role.toLowerCase() === 'admin') {
+                        window.location.href = 'admin.html'; // Chuyển hướng đến trang quản trị của bạn
+                    } else {
+                        window.location.href = 'index.html'; // Chuyển hướng về trang chủ
+                    }
+                } else {
+                    // Hiển thị thông báo lỗi cụ thể từ Server (Ví dụ: sai tài khoản hoặc mật khẩu)
+                    alert(data.message || 'Đăng nhập không thành công!');
+                }
+            } catch (error) {
+                console.error('Lỗi kết nối hệ thống:', error);
+                alert('Không thể kết nối đến máy chủ Backend! Hãy chắc chắn rằng bạn đã bật Server Node.js tại cổng 5000.');
+            }
+        });
+    </script>
+</body>
+
+</html>

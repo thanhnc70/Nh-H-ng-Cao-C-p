@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>WS Restaurant Payment Gateway</title>
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<link rel="stylesheet"
+href="assets/css/style.css">
+
+</head>
+
+<body>
+
+<header class="header">
+
+<nav class="navbar">
+
+<div class="logo">
+
+<i class="fa-solid fa-utensils"></i>
+
+<span>WS RESTAURANT</span>
+
+</div>
+
+<ul class="nav-links">
+
+<li><a href="index.html">Home</a></li>
+
+<li><a href="menu.html">Menu</a></li>
+
+<li><a href="cart.html">Cart</a></li>
+
+<li><a href="payment.html">Payment</a></li>
+
+</ul>
+
+<div id="navbar-user"></div>
+
+</nav>
+
+</header>
+
+<!-- HERO -->
+
+<section class="menu-hero">
+
+<h1>
+
+PAYMENT GATEWAY
+
+</h1>
+
+<p>
+
+VNPay • MoMo • Stripe • COD
+
+</p>
+
+</section>
+
+<!-- PAYMENT -->
+
+<section class="payment-section">
+
+<div class="payment-container">
+
+<!-- LEFT -->
+
+<div class="payment-left">
+
+<h2>
+
+Select Payment Method
+
+</h2>
+
+<div class="gateway-grid">
+
+<div class="gateway-card"
+
+onclick="selectGateway('VNPay')">
+
+<i class="fa-solid fa-building-columns"></i>
+
+<h3>VNPay</h3>
+
+</div>
+
+<div class="gateway-card"
+
+onclick="selectGateway('MoMo')">
+
+<i class="fa-solid fa-wallet"></i>
+
+<h3>MoMo</h3>
+
+</div>
+
+<div class="gateway-card"
+
+onclick="selectGateway('Stripe')">
+
+<i class="fa-brands fa-stripe"></i>
+
+<h3>Stripe</h3>
+
+</div>
+
+<div class="gateway-card"
+
+onclick="selectGateway('COD')">
+
+<i class="fa-solid fa-money-bill-wave"></i>
+
+<h3>COD</h3>
+
+</div>
+
+</div>
+
+<div id="selectedGateway">
+
+No Payment Method Selected
+
+</div>
+
+<button
+class="checkout-btn"
+
+onclick="processPayment()">
+
+Process Payment
+
+</button>
+
+</div>
+
+<!-- RIGHT -->
+
+<div class="payment-right">
+
+<h2>
+
+Invoice Preview
+
+</h2>
+
+<div class="invoice-box">
+
+<p>
+
+Invoice ID:
+
+<span id="invoiceId">
+
+INV-0000
+
+</span>
+
+</p>
+
+<p>
+
+Customer:
+
+<span id="invoiceCustomer">
+
+Guest
+
+</span>
+
+</p>
+
+<p>
+
+Amount:
+
+<span id="invoiceAmount">
+
+$0
+
+</span>
+
+</p>
+
+<p>
+
+Status:
+
+<span id="invoiceStatus">
+
+Pending
+
+</span>
+
+</p>
+
+</div>
+
+<button
+class="checkout-btn"
+
+onclick="downloadInvoice()">
+
+Export PDF Invoice
+
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ORDER HISTORY -->
+
+<section class="booking-history">
+
+<h2 class="section-title">
+
+Order History
+
+</h2>
+
+<div id="orderHistory">
+
+<!-- JS -->
+
+</div>
+
+</section>
+
+<!-- SUCCESS MODAL -->
+
+<div id="paymentModal"
+
+class="checkout-modal">
+
+<div class="checkout-content">
+
+<h2>
+
+Payment Success
+
+</h2>
+
+<p>
+
+Your transaction completed successfully.
+
+</p>
+
+<button
+class="checkout-btn"
+
+onclick="closePaymentModal()">
+
+Close
+
+</button>
+
+</div>
+
+</div>
+
+<div id="toast"></div>
+
+<script src="assets/js/auth.js"></script>
+<script src="assets/js/payment.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WS Demo Restaurant</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/responsive.css">
+</head>
+
+<body>
+
+    <div id="loader">
+        <div class="spinner"></div>
+    </div>
+
+    <header class="header">
+        <nav class="navbar">
+            <div class="logo">
+                <i class="fa-solid fa-utensils"></i>
+                <span>WS RESTAURANT</span>
+            </div>
+
+            <ul class="nav-links">
+                <li><a href="index.html">Trang Chủ</a></li>
+                <li><a href="menu.html">Thực Đơn</a></li>
+                <li><a href="booking.html">Đặt Bàn</a></li>
+                <li><a href="promotion.html">Khuyến Mãi</a></li>
+                <li><a href="contact.html">Liên Hệ</a></li>
+            </ul>
+
+            <div class="nav-icons">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <i class="fa-solid fa-heart"></i>
+    <i class="fa-solid fa-cart-shopping"></i>
+    
+    <!-- Bọc thêm thẻ div id="authHeaderArea" vào đây -->
+    <div class="auth-buttons" id="authHeaderArea">
+        <a href="login.html">
+            <button class="login-btn">Đăng Nhập</button>
+        </a>
+        <a href="register.html">
+            <button class="register-btn">Đăng Ký Ngay</button>
+        </a>
+    </div>
+</div>
+
+
+            <div id="menu-btn">
+                <i class="fa-solid fa-bars"></i>
+            </div>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Luxury Dining Experience</h1>
+            <p>Khám phá ẩm thực hiện đại với phong cách nhà hàng doanh nghiệp chuyên nghiệp.</p>
+            <div class="hero-buttons">
+                <a href="menu.html" class="btn-main" style="text-decoration: none;">
+                    <button class="gold-btn">Đặt Món Ngay</button>
+                    </a>
+                </a>
+                <a href="menu.html">
+                    <button class="outline-btn">Xem Menu</button>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section class="search-box">
+        <div class="search-container">
+            <input type="text" placeholder="Tìm món ăn yêu thích...">
+            <button>
+                <i class="fa-solid fa-search"></i>
+            </button>
+        </div>
+    </section>
+
+    <section class="category">
+        <h2 class="section-title">Danh Mục Món Ăn</h2>
+        <div class="category-grid">
+            <div class="category-card">
+                <i class="fa-solid fa-burger"></i>
+                <h3>Fast Food</h3>
+            </div>
+            <div class="category-card">
+                <i class="fa-solid fa-pizza-slice"></i>
+                <h3>Pizza</h3>
+            </div>
+            <div class="category-card">
+                <i class="fa-solid fa-mug-hot"></i>
+                <h3>Drink</h3>
+            </div>
+            <div class="category-card">
+                <i class="fa-solid fa-ice-cream"></i>
+                <h3>Dessert</h3>
+            </div>
+        </div>
+    </section>
+
+    <section class="featured">
+        <h2 class="section-title">Best Seller Menu</h2>
+        <div class="food-grid">
+            
+            <div class="food-card">
+                <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd" alt="burger">
+                <h3><a href="menu.html">Luxury Burger</a></h3>
+                <p>Premium Beef Burger.</p>
+                <div class="price-row">
+                    <span>$12</span>
+                    <button>Add Cart</button>
+                </div>
+            </div>
+
+            <div class="food-card" onclick="location.href='menu.html'">
+                <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591" alt="pizza">
+                <h3>Italian Pizza</h3>
+                <p>Cheese Pizza Special.</p>
+                <div class="price-row">
+                    <span>$18</span>
+                    <button>Add Cart</button>
+                </div>
+            </div>
+
+            <div class="food-card">
+                <img src="https://images.unsplash.com/photo-1559847844-d721426d6edc" alt="steak">
+                <h3>Steak Premium</h3>
+                <p>Chef Signature Steak.</p>
+                <div class="price-row">
+                    <span>$35</span>
+                    <button>Add Cart</button>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="promo">
+        <div class="promo-box">
+            <h2>50% OFF COMBO VIP</h2>
+            <p>Ưu đãi đặc biệt dành cho khách hàng mới.</p>
+            <button class="gold-btn">Nhận Ưu Đãi</button>
+        </div>
+    </section>
+
+    <section class="review">
+        <h2 class="section-title">Khách Hàng Nói Gì</h2>
+        <div class="review-grid">
+            <div class="review-card">
+                <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="user">
+                <h3>Ngọc Lan</h3>
+                <p>★★★★★</p>
+                <p>"Dịch vụ chuyên nghiệp, đồ ăn ngon."</p>
+            </div>
+            <div class="review-card">
+                <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="user">
+                <h3>Minh Khang</h3>
+                <p>★★★★★</p>
+                <p>"Giao diện đẹp, đặt món rất tiện."</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="newsletter">
+        <h2>Subscribe Newsletter</h2>
+        <p>Nhận ưu đãi mới nhất.</p>
+        <div class="newsletter-box">
+            <input type="email" placeholder="Nhập Email">
+            <button>Subscribe</button>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-grid">
+            <div>
+                <h3>WS Restaurant</h3>
+                <p>Modern Enterprise Restaurant Website.</p>
+            </div>
+            <div>
+                <h3>Quick Links</h3>
+                <p><a href="menu.html">Menu</a></p>
+                <p><a href="booking.html">Booking</a></p>
+                <p><a href="contact.html">Contact</a></p>
+            </div>
+            <div>
+                <h3>Social</h3>
+                <div class="social">
+                    <i class="fab fa-facebook"></i>
+                    <i class="fab fa-instagram"></i>
+                    <i class="fab fa-youtube"></i>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <p class="copyright">© 2026 WS Restaurant Enterprise.</p>
+    </footer>
+
+    <button id="topBtn">
+        <i class="fa-solid fa-arrow-up"></i>
+    </button>
+
+    <script src="../assets/js/app.js"></script>
+    <script src="../assets/js/cart.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // 1. Lấy thông tin user vừa đăng nhập thành công từ bộ nhớ trình duyệt
+    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    const authHeaderArea = document.getElementById('authHeaderArea');
+
+    // 2. Nếu tồn tại dữ liệu user (Đã đăng nhập thành công)
+    if (currentUser) {
+        // Lấy tên hiển thị (nếu fullName trống thì dùng email)
+        const displayName = currentUser.fullName || currentUser.email;
+        
+        // Xác định link chuyển hướng: Nếu là Admin thì có thêm nút vào Dashboard
+        let adminLink = '';
+        if (currentUser.role && currentUser.role.toLowerCase() === 'admin') {
+            adminLink = `<a href="admin.html" style="color: #ffd700; margin-right: 15px; text-decoration: none;"><i class="fa-solid fa-user-shield"></i> Trang Admin</a>`;
+        }
+
+        // Thay đổi cấu trúc cụm nút thành tên User và nút Đăng xuất
+        authHeaderArea.innerHTML = `
+            <div style="display: flex; align-items: center; gap: 15px; color: #fff;">
+                ${adminLink}
+                <span style="font-weight: bold; color: #ffd700;">
+                    <i class="fa-solid fa-user"></i> Xin chào, ${displayName}
+                </span>
+                <button id="logoutBtn" style="background: #ff4d4d; color: #fff; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; font-weight: bold;">
+                    Đăng xuất
+                </button>
+            </div>
+        `;
+
+        // 3. Xử lý sự kiện khi người dùng bấm nút Đăng xuất
+        document.getElementById('logoutBtn').addEventListener('click', function() {
+            if(confirm('Bạn có chắc chắn muốn đăng xuất tài khoản?')) {
+                localStorage.removeItem('currentUser'); // Xóa trạng thái đăng nhập
+                alert('Đã đăng xuất tài khoản thành công!');
+                window.location.reload(); // Tải lại trang chủ để quay về giao diện khách ban đầu
+            }
+        });
+    }
+});
+</script>
+
+</body>
+
+</html>

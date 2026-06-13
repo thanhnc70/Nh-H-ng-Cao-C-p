@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>WS Restaurant AI Smart System</title>
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<link rel="stylesheet"
+href="assets/css/style.css">
+
+</head>
+
+<body>
+
+<header class="header">
+
+<nav class="navbar">
+
+<div class="logo">
+
+<i class="fa-solid fa-utensils"></i>
+
+<span>WS RESTAURANT AI</span>
+
+</div>
+
+<ul class="nav-links">
+
+<li><a href="index.html">Home</a></li>
+<li><a href="menu.html">Menu</a></li>
+<li><a href="payment.html">Payment</a></li>
+<li><a href="ai.html">AI Smart</a></li>
+
+</ul>
+
+<div id="navbar-user"></div>
+
+</nav>
+
+</header>
+
+<!-- HERO -->
+
+<section class="menu-hero">
+
+<h1>
+
+AI SMART RESTAURANT
+
+</h1>
+
+<p>
+
+Chatbot • Recommendation • Voice Search • Analytics
+
+</p>
+
+</section>
+
+<!-- AI GRID -->
+
+<section class="ai-section">
+
+<div class="ai-container">
+
+<!-- CHATBOT -->
+
+<div class="ai-card">
+
+<h2>
+
+AI Chatbot Assistant
+
+</h2>
+
+<div id="chatBox">
+
+<div class="bot-message">
+
+Xin chào 👋
+
+Tôi có thể gợi ý món ăn cho bạn.
+
+</div>
+
+</div>
+
+<div class="chat-input">
+
+<input
+type="text"
+
+id="chatInput"
+
+placeholder="Ask AI...">
+
+<button
+onclick="sendAIMessage()">
+
+Send
+
+</button>
+
+</div>
+
+</div>
+
+<!-- FOOD RECOMMEND -->
+
+<div class="ai-card">
+
+<h2>
+
+Food Recommendation AI
+
+</h2>
+
+<select id="foodCategory">
+
+<option value="">
+
+Category
+
+</option>
+
+<option>
+
+Burger
+
+</option>
+
+<option>
+
+Pizza
+
+</option>
+
+<option>
+
+Steak
+
+</option>
+
+<option>
+
+Drink
+
+</option>
+
+</select>
+
+<select id="foodTaste">
+
+<option value="">
+
+Taste
+
+</option>
+
+<option>
+
+Spicy
+
+</option>
+
+<option>
+
+Sweet
+
+</option>
+
+<option>
+
+Cheese
+
+</option>
+
+<option>
+
+Healthy
+
+</option>
+
+</select>
+
+<input
+type="number"
+
+id="foodBudget"
+
+placeholder="Budget">
+
+<button
+class="checkout-btn"
+
+onclick="recommendFood()">
+
+Recommend
+
+</button>
+
+<div id="recommendResult">
+
+No Recommendation Yet
+
+</div>
+
+</div>
+
+<!-- VOICE SEARCH -->
+
+<div class="ai-card">
+
+<h2>
+
+Voice Search AI
+
+</h2>
+
+<input
+type="text"
+
+id="voiceResult"
+
+placeholder="Voice result..."
+
+readonly>
+
+<button
+class="checkout-btn"
+
+onclick="startVoiceSearch()">
+
+🎤 Start Voice Search
+
+</button>
+
+</div>
+
+<!-- ANALYTICS -->
+
+<div class="ai-card">
+
+<h2>
+
+AI Analytics Dashboard
+
+</h2>
+
+<div class="analytics-grid">
+
+<div class="analytics-box">
+
+<h3>
+
+Top Product
+
+</h3>
+
+<p id="topProduct">
+
+Burger Deluxe
+
+</p>
+
+</div>
+
+<div class="analytics-box">
+
+<h3>
+
+Peak Orders
+
+</h3>
+
+<p id="peakOrders">
+
+18:00 PM
+
+</p>
+
+</div>
+
+<div class="analytics-box">
+
+<h3>
+
+AI Insight
+
+</h3>
+
+<p id="aiInsight">
+
+Customers prefer spicy food.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- SMART SEARCH -->
+
+<section class="booking-history">
+
+<h2 class="section-title">
+
+AI Smart Menu Search
+
+</h2>
+
+<input
+type="text"
+
+id="smartSearch"
+
+placeholder="Search Menu...">
+
+<div id="smartResults">
+
+</div>
+
+</section>
+
+<div id="toast"></div>
+
+<script src="assets/js/auth.js"></script>
+<script src="assets/js/ai.js"></script>
+
+</body>
+
+</html>

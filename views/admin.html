@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>WS Admin | Hệ Thống Quản Trị Nhà Hàng</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Roboto', sans-serif;
+        }
+
+        :root {
+            --bg-dark: #0f0f12;
+            --bg-sidebar: #111115;
+            --bg-card: #1a1a1f;
+            --border-dim: #2a2a30;
+            --text-main: #f0f0f0;
+            --text-muted: #a0a0b0;
+            --accent: #f5b042;
+            --accent-glow: rgba(245, 176, 66, 0.2);
+            --danger: #e5484d;
+            --success: #30b98a;
+            --info: #3b82f6;
+        }
+
+        body {
+            background: var(--bg-dark);
+            color: var(--text-main);
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* ========= SIDEBAR ========= */
+        aside {
+            width: 280px;
+            background: var(--bg-sidebar);
+            padding: 1.5rem 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            border-right: 1px solid var(--border-dim);
+            z-index: 10;
+            transition: all 0.2s;
+        }
+
+        .logo {
+            font-size: 1.6rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--accent) 0%, #ffcd7e 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 0 0.75rem 1.2rem 0.75rem;
+            border-bottom: 1px solid var(--border-dim);
+        }
+
+        .logo i {
+            background: none;
+            -webkit-background-clip: unset;
+            background-clip: unset;
+            color: var(--accent);
+            font-size: 1.8rem;
+        }
+
+        .menu-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .menu-item {
+            padding: 12px 16px;
+            border-radius: 14px;
+            color: var(--text-muted);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            font-size: 0.95rem;
+        }
+
+        .menu-item i {
+            width: 24px;
+            font-size: 1.2rem;
+        }
+
+        .menu-item:hover {
+            background: rgba(245, 176, 66, 0.1);
+            color: var(--accent);
+        }
+
+        .menu-item.active {
+            background: var(--accent);
+            color: #0a0a0e;
+            font-weight: 600;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .menu-item.active i {
+            color: #0a0a0e;
+        }
+
+        /* ========= MAIN ========= */
+        main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+            background: var(--bg-dark);
+        }
+
+        header {
+            padding: 1rem 2rem;
+            background: var(--bg-sidebar);
+            border-bottom: 1px solid var(--border-dim);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 5;
+        }
+
+        header h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            letter-spacing: -0.3px;
+        }
+
+        .admin-profile {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            background: rgba(255,255,255,0.03);
+            padding: 6px 16px 6px 20px;
+            border-radius: 60px;
+        }
+
+        .logout-btn {
+            background: rgba(229, 72, 77, 0.9);
+            border: none;
+            padding: 8px 18px;
+            border-radius: 40px;
+            font-weight: 600;
+            color: white;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .logout-btn:hover {
+            background: var(--danger);
+            transform: scale(0.97);
+        }
+
+        .content-body {
+            padding: 28px 32px;
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.25s ease;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(6px);}
+            to { opacity: 1; transform: translateY(0);}
+        }
+
+        /* Analytics Cards */
+        .analytics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 24px;
+            margin-bottom: 40px;
+        }
+
+        .card {
+            background: var(--bg-card);
+            padding: 1.6rem;
+            border-radius: 24px;
+            border: 1px solid var(--border-dim);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+
+        .card:hover {
+            border-color: var(--accent);
+            background: #1f1f26;
+        }
+
+        .card-info h3 {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+        }
+
+        .card-info p {
+            font-size: 2.2rem;
+            font-weight: 800;
+        }
+
+        .card-icon {
+            font-size: 2.5rem;
+            opacity: 0.7;
+            color: var(--accent);
+        }
+
+        /* Tables & UI */
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 0 0 1.2rem 0;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .section-header span {
+            font-weight: 700;
+            font-size: 1.2rem;
+            background: linear-gradient(135deg, #fff, var(--accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .table-responsive {
+            background: var(--bg-card);
+            border-radius: 20px;
+            overflow-x: auto;
+            border: 1px solid var(--border-dim);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 600px;
+        }
+
+        th, td {
+            padding: 14px 20px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-dim);
+        }
+
+        th {
+            background: #121217;
+            color: var(--text-muted);
+            font-weight: 600;
+            font-size: 0.8rem;
+            letter-spacing: 0.5px;
+        }
+
+        tr:hover td {
+            background: rgba(245, 176, 66, 0.05);
+        }
+
+        .badge {
+            padding: 4px 12px;
+            border-radius: 30px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            display: inline-block;
+        }
+
+        .badge-admin {
+            background: rgba(245, 176, 66, 0.2);
+            color: var(--accent);
+        }
+
+        .badge-customer {
+            background: rgba(48, 185, 138, 0.2);
+            color: var(--success);
+        }
+
+        .btn {
+            padding: 6px 16px;
+            border-radius: 30px;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.8rem;
+        }
+
+        .btn-add {
+            background: var(--success);
+            color: #0a0a0e;
+        }
+
+        .btn-edit {
+            background: var(--accent);
+            color: #121212;
+            margin-right: 8px;
+        }
+
+        .btn-delete {
+            background: var(--danger);
+            color: white;
+        }
+
+        .btn-add:hover, .btn-edit:hover, .btn-delete:hover {
+            filter: brightness(0.92);
+            transform: translateY(-1px);
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(6px);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .modal-content {
+            background: var(--bg-card);
+            border-radius: 28px;
+            padding: 28px 32px;
+            width: 480px;
+            max-width: 92%;
+            border: 1px solid var(--border-dim);
+            box-shadow: 0 20px 35px rgba(0,0,0,0.5);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        .close-modal {
+            font-size: 1.8rem;
+            cursor: pointer;
+            line-height: 1;
+            transition: 0.2s;
+        }
+
+        .form-group {
+            margin-bottom: 1.2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .form-group label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+
+        .form-group input, .form-group select {
+            background: #25252c;
+            border: 1px solid #2f2f38;
+            padding: 12px 14px;
+            border-radius: 16px;
+            color: white;
+            font-size: 0.9rem;
+            outline: none;
+            transition: 0.2s;
+        }
+
+        .form-group input:focus, .form-group select:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 2px var(--accent-glow);
+        }
+    </style>
+</head>
+<body>
+
+<aside>
+    <div class="logo"><i class="fa-solid fa-utensils"></i> WS ADMIN</div>
+    <ul class="menu-list">
+        <li class="menu-item active" id="menu-dashboard-btn" onclick="switchTab('dashboard-tab', this)"><i class="fa-solid fa-chart-pie"></i> Tổng quan</li>
+        <li class="menu-item" id="menu-user-btn" onclick="switchTab('users-tab', this)"><i class="fa-solid fa-users-gear"></i> Quản lý Thành viên</li>
+        <li class="menu-item" id="menu-food-btn" onclick="switchTab('foods-tab', this)"><i class="fa-solid fa-hamburger"></i> Quản lý Món ăn</li>
+        <li class="menu-item" id="menu-order-btn" onclick="switchTab('orders-tab', this)"><i class="fa-solid fa-receipt"></i> Đơn hàng</li>
+        <a href="index.html" class="menu-item" id="home-link"><i class="fa-solid fa-house"></i> Xem Trang chủ</a>
+    </ul>
+</aside>
+
+<main>
+    <header>
+        <h2><i class="fa-solid fa-shield-haltered"></i> Bảng điều khiển</h2>
+        <div class="admin-profile">
+            <span><i class="fa-regular fa-user"></i> <b id="adminNameDisplay">Admin</b></span>
+            <button class="logout-btn" onclick="handleLogout()"><i class="fa-solid fa-arrow-right-from-bracket"></i> Thoát</button>
+        </div>
+    </header>
+
+    <div class="content-body">
+        <div id="dashboard-tab" class="tab-content active">
+            <section class="analytics-grid">
+                <div class="card" onclick="document.getElementById('menu-user-btn').click()">
+                    <div class="card-info"><h3>Tổng thành viên</h3><p id="totalUsersCount">0</p></div>
+                    <div class="card-icon"><i class="fa-solid fa-user-group"></i></div>
+                </div>
+                <div class="card" onclick="document.getElementById('menu-order-btn').click()">
+                    <div class="card-info"><h3>Doanh thu (VND)</h3><p id="totalRevenueCount">0₫</p></div>
+                    <div class="card-icon"><i class="fa-solid fa-sack-dollar"></i></div>
+                </div>
+                <div class="card" onclick="document.getElementById('menu-food-btn').click()">
+                    <div class="card-info"><h3>Món đang phục vụ</h3><p id="totalFoodCount">4</p></div>
+                    <div class="card-icon"><i class="fa-solid fa-bowl-food"></i></div>
+                </div>
+            </section>
+        </div>
+
+        <div id="users-tab" class="tab-content">
+            <div class="section-header">
+                <span><i class="fa-solid fa-users"></i> Danh sách thành viên</span>
+                <button class="btn btn-add" onclick="openAddModal()"><i class="fa-solid fa-user-plus"></i> Thêm thành viên</button>
+            </div>
+            <div class="table-responsive">
+                <table>
+                    <thead><tr><th>ID</th><th>Họ tên</th><th>Email</th><th>Vai trò</th><th>Hành động</th></tr></thead>
+                    <tbody id="usersTableBody"><tr><td colspan="5" style="text-align:center;">Đang tải dữ liệu...</td></tr></tbody>
+                </table>
+            </div>
+        </div>
+
+        <div id="foods-tab" class="tab-content">
+            <div class="section-header"><span><i class="fa-solid fa-utensils"></i> Thực đơn nhà hàng</span></div>
+            <div class="table-responsive">
+                <table>
+                    <thead><tr><th>ID</th><th>Tên món</th><th>Giá (VND)</th><th>Trạng thái</th></tr></thead>
+                    <tbody>
+                        <tr><td>1</td><td>🔥 Burger Wagyu A5</td><td>350,000₫</td><td><span class="badge badge-customer">Đang phục vụ</span></td></tr>
+                        <tr><td>2</td><td>🦐 Pizza Tôm Hùm</td><td>490,000₫</td><td><span class="badge badge-customer">Đang phục vụ</span></td></tr>
+                        <tr><td>3</td><td>🥩 Bò Úc sốt rượu vang</td><td>620,000₫</td><td><span class="badge badge-customer">Hot trend</span></td></tr>
+                        <tr><td>4</td><td>🥑 Salad cá hồi</td><td>189,000₫</td><td><span class="badge badge-customer">Món mới</span></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div id="orders-tab" class="tab-content">
+            <div class="section-header"><span><i class="fa-regular fa-receipt"></i> Lịch sử đơn hàng</span></div>
+            <div class="table-responsive">
+                <table>
+                    <thead><tr><th>Mã đơn</th><th>Khách hàng</th><th>Email</th><th>Tổng tiền</th><th>Thời gian</th><th>Trạng thái</th></tr></thead>
+                    <tbody id="adminOrderTableBody"><tr><td colspan="6" style="text-align:center;">Đang tải đơn hàng...</td></tr></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</main>
+
+<div id="userModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <span id="modalTitle">Quản lý thành viên</span>
+            <span class="close-modal" onclick="closeModal()">&times;</span>
+        </div>
+        <form id="userForm">
+            <input type="hidden" id="userIdField">
+            <div class="form-group"><label>Họ và tên</label><input type="text" id="fullNameField" required placeholder="Nguyễn Văn A"></div>
+            <div class="form-group"><label>Email</label><input type="email" id="emailField" required placeholder="admin@example.com"></div>
+            <div class="form-group" id="passwordGroup"><label>Mật khẩu</label><input type="password" id="passwordField" placeholder="••••••"></div>
+            <div class="form-group"><label>Vai trò</label><select id="roleField"><option value="Customer">Customer</option><option value="Admin">Admin</option></select></div>
+            <button type="submit" class="btn btn-add" style="width:100%; justify-content:center;"><i class="fa-regular fa-floppy-disk"></i> Lưu dữ liệu</button>
+        </form>
+    </div>
+</div>
+
+<script>
+    // ======================== CONFIGURATION ========================
+    const API_BASE = 'http://localhost:5000/api/auth';
+    const USERS_URL = `${API_BASE}/users`;
+    const ORDERS_URL = `${API_BASE}/admin/orders`;
+
+    // Helper: check admin auth
+    (function enforceAdmin() {
+        const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
+        if (!currentUser || !currentUser.role || currentUser.role.toLowerCase() !== 'admin') {
+            alert('⚠️ Truy cập bị từ chối! Vui lòng đăng nhập với quyền quản trị.');
+            window.location.href = 'login.html';
+            return;
+        }
+        document.getElementById('adminNameDisplay').innerText = currentUser.fullName || 'Quản trị viên';
+    })();
+
+    // Global tab switching
+    function switchTab(tabId, element) {
+        document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+        document.querySelectorAll('.menu-item').forEach(it => it.classList.remove('active'));
+        document.getElementById(tabId).classList.add('active');
+        if(element) element.classList.add('active');
+        
+        // Reload data based on active tab safely
+        if(tabId === 'users-tab') fetchLiveUsers();
+        if(tabId === 'orders-tab') loadAdminOrders();
+        if(tabId === 'dashboard-tab') {
+            fetchLiveUsers();   
+            loadAdminOrders();
+        }
+    }
+
+    // ========== 1. USERS: FETCH + RENDER ==========
+    async function fetchLiveUsers() {
+        try {
+            const res = await fetch(USERS_URL);
+            const data = await res.json();
+            if (res.ok && data.success) {
+                const users = data.users || [];
+                const userCountElem = document.getElementById('totalUsersCount');
+                if (userCountElem) userCountElem.innerText = users.length;
+                
+                const tbody = document.getElementById('usersTableBody');
+                if (!tbody) return;
+                
+                if(users.length === 0) {
+                    tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;">Chưa có thành viên</td></tr>';
+                    return;
+                }
+                tbody.innerHTML = '';
+                users.forEach(user => {
+                    const roleClass = user.role === 'Admin' ? 'badge-admin' : 'badge-customer';
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${user.id}</td>
+                        <td><i class="fa-regular fa-circle-user"></i> ${escapeHtml(user.fullName)}</td>
+                        <td>${escapeHtml(user.email)}</td>
+                        <td><span class="badge ${roleClass}">${user.role}</span></td>
+                        <td>
+                            <button class="btn btn-edit" onclick="openEditModal(${user.id}, '${escapeHtml(user.fullName)}', '${escapeHtml(user.email)}', '${user.role}')"><i class="fa-regular fa-pen-to-square"></i> Sửa</button>
+                            <button class="btn btn-delete" onclick="deleteUser(${user.id})"><i class="fa-regular fa-trash-can"></i> Xóa</button>
+                        </td>
+                    `;
+                    tbody.appendChild(row);
+                });
+            }
+        } catch(error) {
+            console.error('Lỗi kết nối API users:', error);
+            const tbody = document.getElementById('usersTableBody');
+            if(tbody) tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;">⚠️ Không tải được danh sách, kiểm tra backend</td></tr>';
+        }
+    }
+
+    // ========== 2. ORDERS: FETCH + RENDER + REVENUE ==========
+    async function loadAdminOrders() {
+        try {
+            const response = await fetch(ORDERS_URL);
+            const data = await response.json();
+            const tbody = document.getElementById('adminOrderTableBody');
+            if(!tbody) return;
+            
+            if(data.success && data.orders) {
+                const orders = data.orders;
+                if(orders.length === 0) {
+                    tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;">📭 Chưa có đơn hàng nào.</td></tr>';
+                    updateRevenueCard(orders);
+                    return;
+                }
+                let html = '';
+                orders.forEach(order => {
+                    const price = parseFloat(order.TotalPrice) || 0;
+                    const dateFormatted = order.OrderDate ? new Date(order.OrderDate).toLocaleString('vi-VN', {hour12: false}) : 'N/A';
+                    html += `
+                        <tr>
+                            <td style="font-weight:bold; color:#f5b042;">#${order.Id}</td>
+                            <td>${escapeHtml(order.FullName)}</td>
+                            <td>${escapeHtml(order.UserEmail || 'Trống')}</td>
+                            <td style="font-weight:bold;">${price.toLocaleString('vi-VN')}₫</td>
+                            <td>${dateFormatted}</td>
+                            <td><span class="badge badge-customer" style="background:#2a2a35;">${order.Status || 'Hoàn thành'}</span></td>
+                        </tr>
+                    `;
+                });
+                tbody.innerHTML = html;
+                updateRevenueCard(orders);
+            } else {
+                tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;">❌ Lỗi tải đơn hàng</td></tr>';
+                updateRevenueCard([]);
+            }
+        } catch(err) {
+            console.error('Order fetch error', err);
+            const tbody = document.getElementById('adminOrderTableBody');
+            if(tbody) tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;">🔌 Không thể kết nối máy chủ đơn hàng</td></tr>';
+            updateRevenueCard([]);
+        }
+    }
+
+    function updateRevenueCard(ordersList) {
+        if(!ordersList || !Array.isArray(ordersList)) return;
+        const total = ordersList.reduce((sum, o) => {
+            const val = parseFloat(o.TotalPrice) || 0;
+            return sum + val;
+        }, 0);
+        const revenueElem = document.getElementById('totalRevenueCount');
+        if(revenueElem) revenueElem.innerText = total.toLocaleString('vi-VN') + '₫';
+    }
+
+    // ========== MODAL & CRUD ACTIONS ==========
+    function openAddModal() {
+        document.getElementById('modalTitle').innerText = "➕ Thêm thành viên mới";
+        document.getElementById('userIdField').value = "";
+        document.getElementById('fullNameField').value = "";
+        document.getElementById('emailField').value = "";
+        document.getElementById('passwordField').value = "";
+        document.getElementById('passwordGroup').style.display = "flex";
+        document.getElementById('passwordField').required = true;
+        document.getElementById('roleField').value = "Customer";
+        document.getElementById('userModal').style.display = "flex";
+    }
+
+    window.openEditModal = function(id, fullName, email, role) {
+        document.getElementById('modalTitle').innerText = `✏️ Cập nhật thành viên ID: ${id}`;
+        document.getElementById('userIdField').value = id;
+        document.getElementById('fullNameField').value = fullName;
+        document.getElementById('emailField').value = email;
+        document.getElementById('passwordGroup').style.display = "none";
+        document.getElementById('passwordField').required = false;
+        document.getElementById('roleField').value = role;
+        document.getElementById('userModal').style.display = "flex";
+    }
+
+    function closeModal() {
+        document.getElementById('userModal').style.display = "none";
+        document.getElementById('userForm').reset();
+    }
+
+    window.deleteUser = async function(id) {
+        if(!confirm(`⚠️ Xoá vĩnh viễn thành viên ID ${id}? Hành động không thể hoàn tác.`)) return;
+        try {
+            const res = await fetch(`${USERS_URL}/${id}`, { method: 'DELETE' });
+            const data = await res.json();
+            if(data.success) {
+                alert('✅ Xóa thành công!');
+                fetchLiveUsers();
+            } else {
+                alert('❌ Lỗi: ' + (data.message || 'Không thể xóa'));
+            }
+        } catch(e) {
+            alert('Lỗi kết nối khi xóa');
+        }
+    }
+
+    // Handle form submit (create/update)
+    async function handleFormSubmit(e) {
+        e.preventDefault();
+        const id = document.getElementById('userIdField').value;
+        const fullName = document.getElementById('fullNameField').value.trim();
+        const email = document.getElementById('emailField').value.trim();
+        const role = document.getElementById('roleField').value;
+        const isEdit = id !== "";
+        
+        const bodyPayload = { fullName, email, role };
+        if(!isEdit) {
+            const pwd = document.getElementById('passwordField').value;
+            if(!pwd) { alert('Vui lòng nhập mật khẩu cho tài khoản mới'); return; }
+            bodyPayload.password = pwd;
+        }
+        
+        const url = isEdit ? `${USERS_URL}/${id}` : USERS_URL;
+        const method = isEdit ? 'PUT' : 'POST';
+        
+        try {
+            const response = await fetch(url, {
+                method: method,
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(bodyPayload)
+            });
+            const result = await response.json();
+            if(result.success) {
+                alert(result.message || 'Thao tác thành công!');
+                closeModal();
+                fetchLiveUsers();
+            } else {
+                alert(`⚠️ ${result.message || 'Thao tác thất bại'}`);
+            }
+        } catch(error) {
+            alert('⚠️ Lỗi kết nối tới máy chủ! Kiểm tra backend tại localhost:5000');
+        }
+    }
+
+    // Helper XSS safe
+    function escapeHtml(str) {
+        if(!str) return '';
+        return str.replace(/[&<>]/g, function(m) {
+            if(m === '&') return '&amp;';
+            if(m === '<') return '&lt;';
+            if(m === '>') return '&gt;';
+            return m;
+        });
+    }
+
+    function handleLogout() {
+        localStorage.removeItem('currentUser');
+        window.location.href = 'login.html';
+    }
+    
+    // Event binding
+    document.getElementById('userForm').addEventListener('submit', handleFormSubmit);
+    window.onclick = function(event) {
+        const modal = document.getElementById('userModal');
+        if(event.target === modal) closeModal();
+    }
+
+    // Initial data load
+    document.addEventListener('DOMContentLoaded', () => {
+        fetchLiveUsers();
+        loadAdminOrders();
+        const foodCountElem = document.getElementById('totalFoodCount');
+        if(foodCountElem) foodCountElem.innerText = '4';
+    });
+
+    window.loadAdminOrders = loadAdminOrders;
+    window.fetchLiveUsers = fetchLiveUsers;
+</script>
+</body>
+</html>

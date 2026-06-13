@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WS Restaurant Register</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/responsive.css">
+</head>
+
+<body>
+    
+    <h1 class="brand-title">
+        <a href="index.html" style="text-decoration: none; color: inherit;">HOME - RESTAURANT</a>
+    </h1>
+
+    <section class="auth-page">
+        <div class="auth-container">
+
+            <div class="auth-left">
+                <h1>WS RESTAURANT</h1>
+                <p>Enterprise Authentication System</p>
+                <img src="https://images.unsplash.com/photo-1552566626-52f8b828add9" alt="restaurant">
+            </div>
+
+            <div class="auth-right">
+                <h2>Đăng Ký Tài Khoản</h2>
+                <p class="auth-subtitle">Customer / Admin Registration</p>
+
+                <form class="auth-form register-form">
+                    
+                    <input type="text" id="registerName" placeholder="Họ tên" required>
+                    
+                    <input type="email" id="registerEmail" placeholder="Email" required>
+                    
+                    <input type="password" id="registerPassword" placeholder="Password" required>
+                    
+                    <input type="password" id="confirmPassword" placeholder="Confirm Password" required>
+
+                    <select id="registerRole">
+                        <option value="Customer">Customer</option>
+                        <option value="Admin">Admin</option>
+                    </select>
+
+                    <div class="remember-box">
+                        <label>
+                            <input type="checkbox" id="agreeTerms" required> Tôi đồng ý điều khoản sử dụng
+                        </label>
+                    </div>
+
+                    <button type="submit" class="auth-btn">REGISTER</button>
+
+                    <p class="switch-auth">
+                        Đã có tài khoản? <a href="login.html">Đăng nhập</a>
+                    </p>
+                    
+                </form>
+            </div>
+
+        </div>
+    </section>
+
+    <div id="toast"></div>
+
+    <a href="index.html" class="back-home-btn" style="position: absolute; bottom: 20px; left: 20px; color: #fff; text-decoration: none; font-size: 14px; display: flex; align-items: center; gap: 5px;">
+        <i class="fas fa-arrow-left"></i> Quay lại trang chủ
+    </a>
+
+    <script src="../assets/js/auth.js"></script>
+
+</body>
+
+</html>

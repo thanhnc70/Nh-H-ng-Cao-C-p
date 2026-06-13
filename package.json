@@ -1,0 +1,32 @@
+{
+  "name": "website-nhahang-full-dong",
+  "version": "1.0.0",
+  "description": "Website nhà hàng động sử dụng NodeJS + Express + SQL Server",
+  "main": "server/server.js",
+  "scripts": {
+    "start": "node server/server.js",
+    "dev": "nodemon server/server.js"
+  },
+  "keywords": [
+    "restaurant",
+    "nodejs",
+    "express",
+    "sqlserver",
+    "website"
+  ],
+  "author": "thanh.nc",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "body-parser": "^1.20.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "ejs": "^3.1.10",
+    "express": "^4.19.2",
+    "express-session": "^1.18.0",
+    "mssql": "^10.0.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.0"
+  }
+}
