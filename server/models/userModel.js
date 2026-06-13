@@ -1,37 +1,24 @@
-const { DataTypes } = require('sequelize');
-const sequelize = require('../config/db'); // Đảm bảo đường dẫn này đúng tới file db.js của bạn
+const { db } = require('../config/db'); // Import đối tượng kết nối db từ file server/config/db.js
 
-const User = sequelize.define('User', {
-    id: {
-        type: DataTypes.INTEGER,
-        primaryKey: true,
-        autoIncrement: true,
-        field: 'Id' // Khớp với cột Id trong SQL Server
+const User = {
+    // 1. Hàm lấy tất cả người dùng
+    getAllUsers: async () => {
+        const [rows] = await db.query("SELECT * FROM Users");
+        return rows;
     },
-    fullName: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        field: 'FullName' // Khớp với cột FullName trong SQL Server
+
+    // 2. Hàm tìm người dùng theo Email
+    findByEmail: async (email) => {
+        const [rows] = await db.query("SELECT * FROM Users WHERE Email = ?", [email]);
+        return rows[0]; 
     },
-    email: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        unique: true,
-        field: 'Email' // Khớp với cột Email trong SQL Server
-    },
-    password: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        field: 'PasswordHash' // Biến password trong code sẽ lưu vào cột PasswordHash ở DB
-    },
-    role: {
-        type: DataTypes.STRING,
-        defaultValue: 'Customer',
-        field: 'Role' // Khớp với cột Role trong SQL Server
+
+    // 3. Hàm tạo tài khoản mới
+    createUser: async (fullName, email, passwordHash, role) => {
+        const query = "INSERT INTO Users (FullName, Email, PasswordHash, Role) VALUES (?, ?, ?, ?)";
+        const [result] = await db.query(query, [fullName, email, passwordHash, role]);
+        return result.insertId; 
     }
-}, {
-    tableName: 'Users', // Bắt buộc trỏ đúng tên bảng viết hoa chữ U trong SSMS
-    timestamps: false   // Tắt timestamps nếu trong DB bạn tự tạo cột CreatedAt độc lập
-});
+};
 
 module.exports = User;

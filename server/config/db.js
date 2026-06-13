@@ -1,23 +1,29 @@
-const sql = require('mssql');
+const mysql = require('mysql2');
+require('dotenv').config();
 
-const config = {
-    user: 'sa', 
-    password: '123456', // Đảm bảo mật khẩu này trùng với mật khẩu sa trong SSMS của bạn
-    server: 'localhost', 
-    database: 'NhaHangDB', 
-    options: {
-        encrypt: false,               
-        trustServerCertificate: true  // Bắt buộc đối với SQL Server đời mới
+const pool = mysql.createPool({
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_NAME,
+    port: process.env.DB_PORT || 12347,
+    waitForConnections: true,
+    connectionLimit: 10,
+    queueLimit: 0,
+    ssl: {
+        rejectUnauthorized: false // ◄ BẮT BUỘC PHẢI CÓ DÒNG NÀY ĐỂ KẾT NỐI ĐƯỢC AIVEN
     }
-};
+});
+
+const db = pool.promise();
 
 const connectDB = async () => {
     try {
-        await sql.connect(config);
-        console.log('✅ KẾT NỐI SQL SERVER THÀNH CÔNG!');
+        await db.query("SELECT 1");
+        console.log('✅ KẾT NỐI MYSQL ĐÁM MÂY (AIVEN) THÀNH CÔNG!');
     } catch (err) {
-        console.error('❌ LỖI KẾT NỐI DATABASE:', err.message);
+        console.error('❌ LỖI KẾT NỐI DATABASE:', err);
     }
 };
 
-module.exports = { connectDB, sql };
+module.exports = { connectDB, db };
