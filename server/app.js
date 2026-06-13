@@ -13,3 +13,14 @@ app.use('/api/auth', authRoutes);
 
 // 3. Xuất cấu hình ứng dụng app ra ngoài để server.js sử dụng
 module.exports = app;
+
+const path = require('path');
+const express = require('express'); // Đảm bảo đã khai báo express ở đầu file app.js nếu chưa có
+
+// 1. Cho phép Express truy cập công khai và tải file CSS/Hình ảnh/JS trong thư mục views
+app.use(express.static(path.join(__dirname, '../views')));
+
+// 2. Định nghĩa tuyến đường gốc (đường gạch chéo '/') để hiển thị file index.html làm trang chủ
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, '../views/index.html'));
+});
